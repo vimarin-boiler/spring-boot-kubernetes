@@ -19,9 +19,7 @@ steps:
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'vimarin-boiler-usach'
-    scannerMode: 'MSBuild'
-    projectKey: 'vimarin-boiler_spring-boot-kubernetes'
-    projectName: 'spring-boot-kubernetes'
+    scannerMode: 'Other'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -31,4 +29,4 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
-    sqMavenPluginVersionChoice: 'latest'
+    sqMavenPluginVersionChoice: 'pom'
