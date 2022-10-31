@@ -37,6 +37,10 @@ steps:
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
+- task: sonarcloud-buildbreaker@2
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'vimarin-boiler-usach'
 - task: dependency-check-build-task@6
   inputs:
     projectName: 'spring-boot-kubernetes'
@@ -45,6 +49,7 @@ steps:
 - task: DockerInstaller@0
   inputs:
     dockerVersion: '17.09.0-ce'
+  displayName: Install Docker
 - task: Docker@2
   inputs:
     containerRegistry: 'Docker'
@@ -52,6 +57,7 @@ steps:
     command: 'build'
     Dockerfile: '**/Dockerfile'
     tags: 'latest'
+  displayName: Build Docker
 
 - script: | 
     sudo apt-get install -y rpm
@@ -65,4 +71,5 @@ steps:
     repository: 'vimarin/spring-boot-kubernetes'
     command: 'push'
     tags: 'latest'
+  displayName: Publish Docker
 
